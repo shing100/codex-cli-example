@@ -1,145 +1,78 @@
-# CLAUDE.md
+# OpenAI Codex CLI 연구 프로젝트
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+이 프로젝트는 OpenAI Codex CLI의 사용법을 연구하고 실제 활용 예제를 제공하기 위해 만들어졌습니다.
 
-## Project Overview
+## 🎯 프로젝트 목표
 
-This is the **SuperClaude Workflow Generator** (`/sc:workflow`) - a comprehensive implementation workflow generator that analyzes Product Requirements Documents (PRDs) and feature specifications to create detailed, step-by-step implementation workflows with expert guidance.
+1. **OpenAI Codex CLI 기능 조사**: 공식 문서와 실제 사용을 통한 기능 분석
+2. **실습 예제 작성**: 기초부터 고급까지 다양한 사용 예제 제공  
+3. **모범 사례 문서화**: 효과적인 사용법과 워크플로우 정리
+4. **한국어 가이드 제공**: 한국 개발자들을 위한 상세한 설명과 예제
 
-## Architecture
-
-The project implements a modular Node.js application with the following key components:
-
-- **Core Engine** (`src/core/`) - Main workflow generation logic with persona-based intelligence
-- **Expert Personas** (`src/personas/`) - 6 specialized AI personas (Architect, Frontend, Backend, Security, DevOps, QA)
-- **PRD Parser** (`src/parsers/`) - Advanced parsing of Markdown PRDs and feature descriptions
-- **Output Formatters** (`src/formatters/`) - Multiple output formats (Roadmap, Tasks, Detailed)
-- **Quality Gates** (`src/core/QualityGates.js`) - 8-step validation framework
-- **CLI Interface** (`src/index.js`) - Command-line interface with comprehensive options
-
-## Development Commands
-
-### Core Commands
-```bash
-# Install dependencies
-npm install
-
-# Run the workflow generator
-npm start generate <input> [options]
-
-# Interactive mode
-npm start interactive
-
-# Run demo
-npm run demo
-
-# Run tests
-npm test
-
-# Validate code (tests + linting)
-npm run validate
-```
-
-### Example Usage
-```bash
-# Generate from feature description
-npm start generate "Create user authentication with OAuth" --persona security
-
-# Generate from PRD file
-npm start generate examples/sample-prd.md --output detailed --estimate
-
-# Full-featured generation
-npm start generate examples/sample-prd.md --persona architect --all-mcp --risks --dependencies --save workflow.md
-```
-
-## Key Features
-
-1. **Multi-Persona Intelligence**: Each persona has specialized knowledge, priorities, and MCP server preferences
-2. **Strategy Options**: Systematic (detailed phases), Agile (sprints), MVP (rapid validation)
-3. **Output Formats**: Roadmap (executive), Tasks (development), Detailed (implementation guide)
-4. **Quality Validation**: 8-step quality gates ensuring workflow completeness
-5. **Advanced Analysis**: Dependency mapping, risk assessment, time estimation
-6. **MCP Integration**: Mock integration with Context7, Sequential, Magic, Playwright servers
-
-## Expert Personas
-
-- **architect**: Systems design, scalability, long-term maintainability
-- **frontend**: UI/UX, accessibility, performance, responsive design
-- **backend**: APIs, databases, reliability, security
-- **security**: Threat modeling, compliance, vulnerability assessment
-- **devops**: Infrastructure, CI/CD, monitoring, automation
-- **qa**: Testing strategy, quality assurance, edge case detection
-
-## File Structure
+## 📁 프로젝트 구조
 
 ```
-src/
-├── core/
-│   ├── WorkflowGenerator.js     # Main orchestration engine
-│   ├── DependencyAnalyzer.js    # Dependency mapping and analysis
-│   ├── RiskAssessment.js        # Risk identification and mitigation
-│   ├── MCPIntegration.js        # Mock MCP server integration
-│   └── QualityGates.js          # 8-step validation framework
-├── personas/
-│   ├── PersonaFactory.js        # Persona instantiation
-│   ├── BasePersona.js           # Shared persona functionality
-│   └── [Specific personas...]   # Individual persona implementations
-├── parsers/
-│   └── PRDParser.js             # PRD and description parsing
-├── formatters/
-│   └── OutputFormatter.js       # Output format generation
-└── index.js                     # CLI interface and command handling
-
-examples/
-├── sample-prd.md               # Example PRD for testing
-└── demo.js                     # Interactive demo script
-
-test/
-└── workflow-generator.test.js  # Test suite
+codex-example/
+├── README.md                    # 메인 가이드 (한국어)
+├── CLAUDE.md                    # Claude Code 설정 파일
+├── examples/                    # 실습 예제 모음
+│   ├── basic/                   # 기초 예제
+│   │   ├── react-component-example.js
+│   │   ├── api-creation-example.js
+│   │   └── test-generation-example.js
+│   ├── advanced/                # 고급 예제
+│   │   ├── typescript-migration.ts
+│   │   └── database-migration.sql
+│   └── real-world/              # 실제 프로젝트 예제
+│       └── e-commerce-api.js
+├── docs/                        # 문서
+│   ├── installation-guide.md    # 설치 가이드
+│   └── best-practices.md        # 모범 사례
+└── config/                      # 설정 파일
+    └── .codex.json              # Codex CLI 설정 예제
 ```
 
-## Testing Strategy
+## 🔧 개발 환경 설정
 
-- **Unit Tests**: Core functionality and individual components
-- **Integration Tests**: Persona workflows and output formatting
-- **CLI Tests**: Command-line interface and flag handling
-- **Example Validation**: Sample PRD processing and output generation
+이 프로젝트를 Claude Code에서 효과적으로 작업하기 위한 설정입니다.
 
-## Extension Points
+### 주요 명령어
 
-### Adding New Personas
-1. Create new persona class extending `BasePersona`
-2. Implement persona-specific workflow generation methods
-3. Add to `PersonaFactory` registration
-4. Update CLI help and documentation
+- `npm run docs` - 문서 업데이트 및 정리
+- `npm run examples` - 예제 코드 검증
+- `npm run lint` - 코드 스타일 검사
 
-### Adding Output Formats
-1. Add new formatter method to `OutputFormatter`
-2. Register in formatters map
-3. Update CLI options and validation
-4. Add tests for new format
+### 작업 워크플로우
 
-### Enhancing Analysis
-1. Extend `DependencyAnalyzer` for new dependency types
-2. Add risk categories to `RiskAssessment`
-3. Implement new quality gates in `QualityGates`
-4. Update MCP integration patterns
+1. **조사 단계**: OpenAI Codex CLI 공식 문서 및 리소스 분석
+2. **실습 단계**: 직접 사용해보며 예제 작성
+3. **문서화 단계**: 사용법과 모범 사례 정리
+4. **검증 단계**: 예제 코드와 가이드 검토
 
-## Integration with SuperClaude Ecosystem
+## 📚 학습 리소스
 
-This implementation serves as a reference for the `/sc:workflow` command specification, demonstrating:
+### 공식 문서
+- [OpenAI Codex CLI 시작 가이드](https://help.openai.com/en/articles/11096431-openai-codex-cli-getting-started)
+- [GitHub 리포지토리](https://github.com/openai/codex)
 
-- Persona-based AI intelligence with specialized expertise
-- Multi-strategy workflow generation approaches
-- Comprehensive analysis capabilities (dependencies, risks, estimates)
-- Quality validation frameworks
-- MCP server integration patterns
-- CLI design patterns for complex AI tools
+### 참고 프로젝트
+- `claude-code-usage/` - Claude Code 사용법 연구 프로젝트
+- `SuperClaude_Framework/` - SuperClaude 프레임워크
 
-## Best Practices
+## 🎯 Claude Code 작업 지침
 
-- **Persona Consistency**: Each persona maintains consistent priorities and decision-making patterns
-- **Modular Design**: Clear separation between parsing, analysis, generation, and formatting
-- **Quality First**: Multiple validation layers ensure workflow completeness
-- **Extensibility**: Plugin-style architecture for easy enhancement
-- **User Experience**: Comprehensive CLI with examples, help, and interactive mode
+### 이 프로젝트에서 작업할 때:
+
+1. **실제 사용 중심**: 이론보다는 실제 활용 가능한 예제에 집중
+2. **단계별 접근**: 기초 → 중급 → 고급 순서로 예제 작성
+3. **한국어 문서화**: 한국 개발자들이 이해하기 쉬운 설명 제공
+4. **실용성 우선**: 실제 개발 현장에서 바로 적용 가능한 내용
+
+### 예제 작성 원칙:
+
+- **Before/After 형식**: 변환 전후 코드를 명확히 보여주기
+- **명령어 포함**: 실제 Codex 명령어를 주석으로 기록
+- **설명 추가**: 각 예제의 목적과 활용 상황 설명
+- **점진적 복잡도**: 간단한 것부터 복잡한 것 순서로 배치
+
+이 프로젝트는 OpenAI Codex CLI를 처음 접하는 개발자부터 고급 사용자까지 모두에게 도움이 되는 종합 가이드를 목표로 합니다.

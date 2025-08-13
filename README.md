@@ -1,298 +1,295 @@
-# SuperClaude Workflow Generator (`/sc:workflow`)
+# OpenAI Codex CLI 사용법 및 예제
 
-A comprehensive implementation workflow generator for analyzing Product Requirements Documents (PRDs) and feature specifications. Generates step-by-step implementation workflows with expert guidance, dependency mapping, and automated task orchestration. Also includes project documentation generation capabilities via `/sc:index`.
+OpenAI Codex CLI에 대한 종합적인 사용법 조사 및 실습 예제 모음
 
-## Features
+## 📋 목차
 
-- **Multi-Persona Support**: 6 specialized expert personas (Architect, Frontend, Backend, Security, DevOps, QA)
-- **Multiple Strategies**: Systematic, Agile, and MVP workflow approaches
-- **Output Formats**: Roadmap, Tasks, and Detailed implementation guides
-- **PRD Parsing**: Advanced parsing of Markdown PRDs and plain text feature descriptions
-- **Dependency Analysis**: Automatic mapping of internal, external, and technical dependencies
-- **Risk Assessment**: Comprehensive risk analysis with mitigation strategies
-- **Quality Gates**: 8-step validation framework ensuring workflow completeness
-- **MCP Integration**: Mock integration with Context7, Sequential, Magic, and Playwright servers
-- **Time Estimation**: Intelligent time and complexity estimates
-- **Parallel Work Identification**: Automatic detection of parallelizable work streams
-- **Project Documentation**: Comprehensive API documentation and project structure analysis via `/sc:index`
-- **Multiple Output Formats**: Markdown, JSON, and YAML documentation outputs
+- [개요](#개요)
+- [설치 방법](#설치-방법)
+- [기본 사용법](#기본-사용법)
+- [실습 예제](#실습-예제)
+- [고급 기능](#고급-기능)
+- [모범 사례](#모범-사례)
+- [문제 해결](#문제-해결)
 
-## Installation
+## 📖 개요
+
+OpenAI Codex CLI는 터미널에서 로컬로 실행되는 경량 코딩 에이전트입니다.
+
+### 주요 특징
+
+- **대화형 및 비대화형 모드** 지원
+- **ChatGPT 및 OpenAI API** 인증
+- **다양한 자율성 수준**의 샌드박스 모드
+- **실험적 도구**로 활발한 개발 중
+- **코드 리팩토링, 마이그레이션 생성, 테스트 작성** 등 지원
+
+### 시스템 요구사항
+
+- **운영체제**: macOS 12+, Ubuntu 20.04+/Debian 10+, Windows 11 (WSL2)
+- **메모리**: 4-8 GB RAM 권장
+- **Git**: 2.23+ (선택사항)
+
+## 🚀 설치 방법
+
+### 방법 1: npm을 통한 설치
+```bash
+npm i -g @openai/codex
+```
+
+### 방법 2: Homebrew를 통한 설치 (macOS)
+```bash
+brew install codex
+```
+
+### 설치 확인
+```bash
+codex --version
+```
+
+## 🔧 기본 사용법
+
+### 1. 초기 설정 및 인증
 
 ```bash
-npm install
+# OpenAI API 키 설정
+codex auth
+
+# 또는 환경변수로 설정
+export OPENAI_API_KEY=your_api_key_here
 ```
 
-## Usage
-
-### Basic Usage
+### 2. 대화형 모드
 
 ```bash
-# Generate workflow from description
-npm start generate "Create a user authentication system with login and registration"
+# 대화형 모드 시작
+codex
 
-# Generate workflow from PRD file
-npm start generate examples/sample-prd.md
-
-# Use specific persona
-npm start generate "Build React dashboard" --persona frontend
-
-# Different output formats
-npm start generate "API development" --output detailed --persona backend
+# 프로젝트 디렉토리에서 시작
+cd your-project
+codex
 ```
 
-### Advanced Options
+### 3. 비대화형 모드
 
 ```bash
-# Full-featured workflow generation
-npm start generate examples/sample-prd.md \
-  --persona architect \
-  --strategy systematic \
-  --output detailed \
-  --estimate \
-  --dependencies \
-  --risks \
-  --parallel \
-  --milestones \
-  --all-mcp \
-  --save workflow.md
+# 단일 명령 실행
+codex "Refactor this function to use async/await"
+
+# 파일 지정
+codex --file src/app.js "Add error handling to this function"
 ```
 
-### Project Documentation
+## 💡 실습 예제
+
+### 예제 1: React 컴포넌트 리팩토링
+
+**작업**: 클래스형 컴포넌트를 함수형 컴포넌트로 변환
 
 ```bash
-# Generate comprehensive project documentation
-npm start index --save docs/PROJECT_DOCS.md
-
-# Generate API documentation in JSON format
-npm start index --format json --save docs/api.json
-
-# Generate documentation without examples
-npm start index --no-examples --save docs/structure.md
+# 대상 파일이 있는 디렉토리에서
+codex "Convert this class component to a functional component using React Hooks"
 ```
 
-### Interactive Mode
+**Before:**
+```javascript
+class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { data: null };
+  }
+  
+  componentDidMount() {
+    this.fetchData();
+  }
+  
+  fetchData = () => {
+    // 데이터 fetch 로직
+  }
+  
+  render() {
+    return <div>{this.state.data}</div>;
+  }
+}
+```
+
+**After (Codex 결과):**
+```javascript
+import React, { useState, useEffect } from 'react';
+
+const Dashboard = () => {
+  const [data, setData] = useState(null);
+  
+  useEffect(() => {
+    fetchData();
+  }, []);
+  
+  const fetchData = () => {
+    // 데이터 fetch 로직
+  };
+  
+  return <div>{data}</div>;
+};
+```
+
+### 예제 2: 데이터베이스 마이그레이션 생성
 
 ```bash
-npm start interactive
+codex "Create a database migration to add user authentication tables"
 ```
 
-## Command Reference
-
-### Main Commands
-
-- `generate <input>` - Generate workflow from PRD file or description
-- `index` - Generate comprehensive project documentation and API reference
-- `personas` - List available expert personas
-- `strategies` - List available workflow strategies
-- `examples` - Show usage examples
-- `interactive` - Interactive workflow generation
-
-### Options
-
-- `--persona <type>` - Force specific expert persona (architect, frontend, backend, security, devops, qa, auto)
-- `--strategy <type>` - Workflow strategy (systematic, agile, mvp)
-- `--output <format>` - Output format (roadmap, tasks, detailed)
-- `--estimate` - Include time and complexity estimates
-- `--dependencies` - Map external dependencies and integrations
-- `--risks` - Include risk assessment and mitigation strategies
-- `--parallel` - Identify parallelizable work streams
-- `--milestones` - Create milestone-based project phases
-- `--c7, --context7` - Enable Context7 for framework patterns
-- `--sequential` - Enable Sequential thinking for complex analysis
-- `--magic` - Enable Magic for UI component workflow planning
-- `--all-mcp` - Enable all MCP servers for comprehensive workflow
-- `--validate` - Run quality gates validation
-- `--save <file>` - Save workflow to file
-
-## Expert Personas
-
-### Architect
-- **Focus**: Systems architecture, long-term maintainability, scalability
-- **Specialties**: High-level design, technology selection, scalability planning
-- **MCP Preference**: Sequential (primary), Context7 (secondary)
-
-### Frontend
-- **Focus**: User experience, accessibility, performance
-- **Specialties**: UI components, responsive design, accessibility compliance
-- **MCP Preference**: Magic (primary), Playwright (secondary)
-
-### Backend
-- **Focus**: Reliability, security, data integrity
-- **Specialties**: API design, database architecture, performance optimization
-- **MCP Preference**: Context7 (primary), Sequential (secondary)
-
-### Security
-- **Focus**: Threat modeling, compliance, vulnerability assessment
-- **Specialties**: Security architecture, risk assessment, compliance validation
-- **MCP Preference**: Sequential (primary), Context7 (secondary)
-
-### DevOps
-- **Focus**: Infrastructure, automation, reliability
-- **Specialties**: CI/CD, infrastructure as code, monitoring
-- **MCP Preference**: Sequential (primary), Context7 (secondary)
-
-### QA
-- **Focus**: Quality assurance, testing, edge case detection
-- **Specialties**: Test strategy, automation, quality validation
-- **MCP Preference**: Playwright (primary), Sequential (secondary)
-
-## Workflow Strategies
-
-### Systematic (Default)
-- Comprehensive, phase-based approach
-- Detailed requirements analysis and architecture planning
-- Sequential phases with clear deliverables
-- Best for: Complex projects, enterprise systems
-
-### Agile
-- Sprint-based iterative development
-- User story breakdown and epic organization
-- Continuous delivery and feedback cycles
-- Best for: Dynamic requirements, team collaboration
-
-### MVP
-- Minimum viable product focus
-- Core feature identification and rapid validation
-- Quick market validation and feedback
-- Best for: Startups, proof-of-concepts
-
-## Output Formats
-
-### Roadmap
-- High-level phase overview
-- Timeline and milestone focus
-- Executive-friendly format
-- Checkbox task lists
-
-### Tasks
-- Epic and user story breakdown
-- Detailed task organization
-- Priority and estimation information
-- Development team focus
-
-### Detailed
-- Comprehensive implementation guide
-- Step-by-step instructions
-- Tools and deliverable specifications
-- Architecture and technical focus
-
-## Quality Gates
-
-The system implements an 8-step quality validation framework:
-
-1. **Requirements Validation** - Completeness and traceability
-2. **Architecture Review** - Design decisions and technology choices
-3. **Security Assessment** - Security considerations and threat mitigation
-4. **Performance Validation** - Performance requirements and optimization
-5. **Testing Strategy** - Comprehensive testing approach
-6. **Documentation Review** - Documentation completeness and quality
-7. **Risk Assessment** - Risk identification and mitigation strategies
-8. **Integration Validation** - Dependency and integration planning
-
-## Examples
-
-### Frontend Dashboard
-```bash
-npm start generate "Create a responsive admin dashboard with React, charts, and real-time data" \
-  --persona frontend \
-  --magic \
-  --output detailed \
-  --estimate
-```
-
-### Backend API
-```bash
-npm start generate "Build REST API for e-commerce with authentication, payments, and inventory" \
-  --persona backend \
-  --c7 \
-  --dependencies \
-  --risks
-```
-
-### Full-Stack Application
-```bash
-npm start generate examples/sample-prd.md \
-  --persona architect \
-  --all-mcp \
-  --strategy systematic \
-  --output detailed \
-  --estimate \
-  --dependencies \
-  --risks \
-  --parallel \
-  --milestones
-```
-
-## Testing
+### 예제 3: API 엔드포인트 생성
 
 ```bash
-# Run test suite
-npm test
-
-# Run with coverage
-npm run test:coverage
+codex "Create a RESTful API endpoint for user management with CRUD operations"
 ```
 
-## Development
+### 예제 4: 테스트 코드 생성
 
 ```bash
-# Start in development mode
-npm run dev
-
-# Lint code
-npm run lint
-
-# Format code
-npm run format
+codex "Write unit tests for this utility function using Jest"
 ```
 
-## Architecture
+## ⚙️ 고급 기능
 
-The workflow generator is built with a modular architecture:
+### 샌드박스 모드 설정
 
-- **Core Engine** (`src/core/`) - Main workflow generation logic
-- **Personas** (`src/personas/`) - Expert persona implementations
-- **Parsers** (`src/parsers/`) - PRD and description parsing
-- **Formatters** (`src/formatters/`) - Output format generation
-- **Integration** (`src/core/MCPIntegration.js`) - MCP server coordination
-- **Quality** (`src/core/QualityGates.js`) - Validation framework
+```bash
+# 안전한 모드 (읽기 전용)
+codex --sandbox safe
 
-## File Structure
+# 제한된 모드 (파일 수정 허용)
+codex --sandbox limited
 
-```
-src/
-├── core/
-│   ├── WorkflowGenerator.js     # Main workflow engine
-│   ├── DependencyAnalyzer.js    # Dependency mapping
-│   ├── RiskAssessment.js        # Risk analysis
-│   ├── MCPIntegration.js        # MCP server integration
-│   └── QualityGates.js          # Quality validation
-├── personas/
-│   ├── PersonaFactory.js        # Persona creation
-│   ├── BasePersona.js           # Base persona class
-│   ├── ArchitectPersona.js      # Systems architect
-│   ├── FrontendPersona.js       # UI/UX specialist
-│   ├── BackendPersona.js        # API/data specialist
-│   ├── SecurityPersona.js       # Security expert
-│   ├── DevOpsPersona.js         # Infrastructure expert
-│   └── QAPersona.js             # Quality specialist
-├── parsers/
-│   └── PRDParser.js             # PRD parsing logic
-├── formatters/
-│   └── OutputFormatter.js       # Output formatting
-└── index.js                     # CLI interface
+# 전체 액세스 모드
+codex --sandbox full
 ```
 
-## Contributing
+### 설정 파일 사용
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Run the test suite
-6. Submit a pull request
+`.codex.json` 파일을 프로젝트 루트에 생성:
 
-## License
+```json
+{
+  "model": "gpt-4",
+  "sandbox": "limited",
+  "context": {
+    "include": ["src/**/*.js", "src/**/*.ts"],
+    "exclude": ["node_modules/**", "*.test.js"]
+  }
+}
+```
 
-MIT License - see LICENSE file for details.
+### 커스텀 프롬프트 템플릿
+
+```bash
+# 프롬프트 템플릿 파일 생성
+echo "Refactor the following code to follow ${STYLE} conventions:" > refactor.prompt
+
+# 템플릿 사용
+codex --template refactor.prompt --var STYLE=ESLint
+```
+
+## 📚 모범 사례
+
+### 1. 명확한 지시사항 제공
+```bash
+# 좋은 예
+codex "Convert this function to TypeScript with proper type annotations and error handling"
+
+# 나쁜 예
+codex "fix this"
+```
+
+### 2. 컨텍스트 제공
+```bash
+# 프로젝트 구조와 함께 작업
+codex "Add Redux state management to this React component, following the existing store structure"
+```
+
+### 3. 단계별 접근
+```bash
+# 큰 작업을 작은 단위로 분할
+codex "First, add TypeScript interfaces for the User model"
+codex "Now, update the API service to use these interfaces"
+```
+
+## 🔍 활용 시나리오
+
+### 개발 워크플로우
+
+1. **코드 리뷰 준비**
+   ```bash
+   codex "Review this code for potential bugs and suggest improvements"
+   ```
+
+2. **문서화**
+   ```bash
+   codex "Add JSDoc comments to all functions in this file"
+   ```
+
+3. **성능 최적화**
+   ```bash
+   codex "Optimize this algorithm for better performance"
+   ```
+
+4. **보안 강화**
+   ```bash
+   codex "Add input validation and sanitization to this API endpoint"
+   ```
+
+### 학습 및 탐색
+
+1. **새로운 기술 학습**
+   ```bash
+   codex "Explain how to implement OAuth 2.0 authentication in Express.js"
+   ```
+
+2. **코드 분석**
+   ```bash
+   codex "Explain what this complex function does and how it works"
+   ```
+
+## ⚠️ 주의사항
+
+1. **실험적 도구**: Codex CLI는 실험 단계이므로 프로덕션 환경에서 주의 깊게 사용
+2. **코드 검토**: 생성된 코드는 항상 검토 후 사용
+3. **버전 관리**: 중요한 변경사항은 Git으로 추적
+4. **API 비용**: OpenAI API 사용량 모니터링
+
+## 🛠️ 문제 해결
+
+### 일반적인 문제
+
+1. **인증 오류**
+   ```bash
+   # API 키 재설정
+   codex auth --reset
+   ```
+
+2. **모델 응답 없음**
+   ```bash
+   # 다른 모델 시도
+   codex --model gpt-3.5-turbo
+   ```
+
+3. **네트워크 문제**
+   ```bash
+   # 연결 테스트
+   codex --test-connection
+   ```
+
+## 📖 추가 자료
+
+- [OpenAI Codex 공식 문서](https://help.openai.com/en/articles/11096431-openai-codex-cli-getting-started)
+- [GitHub 리포지토리](https://github.com/openai/codex)
+- [커뮤니티 예제](https://github.com/openai/codex/examples)
+
+## 🤝 기여하기
+
+이 프로젝트는 OpenAI Codex CLI 사용법을 연구하고 공유하기 위한 목적으로 만들어졌습니다. 
+새로운 예제나 사용법을 발견하시면 언제든지 기여해 주세요!
+
+---
+
+**면책조항**: OpenAI Codex CLI는 실험적 도구입니다. 본 가이드의 정보는 참고용이며, 실제 사용 시에는 공식 문서를 확인하시기 바랍니다.

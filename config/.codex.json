@@ -1,0 +1,36 @@
+{
+  "model": "gpt-4",
+  "sandbox": "limited",
+  "context": {
+    "include": [
+      "examples/**/*.js",
+      "examples/**/*.ts", 
+      "examples/**/*.sql",
+      "docs/**/*.md",
+      "README.md"
+    ],
+    "exclude": [
+      "node_modules/**",
+      ".git/**",
+      "*.log"
+    ]
+  },
+  "prompts": {
+    "refactor": "Refactor the following code to follow ${STYLE} conventions and improve readability:",
+    "test": "Write comprehensive unit tests for the following code using ${FRAMEWORK}:",
+    "document": "Add detailed documentation and comments to the following code:",
+    "optimize": "Optimize the following code for better performance and maintainability:",
+    "secure": "Review and improve the security of the following code:"
+  },
+  "templates": {
+    "react-component": "examples/templates/react-component.template",
+    "api-endpoint": "examples/templates/api-endpoint.template",
+    "test-suite": "examples/templates/test-suite.template"
+  },
+  "settings": {
+    "autoSave": true,
+    "backupBeforeChange": true,
+    "validateSyntax": true,
+    "formatOnSave": true
+  }
+}
