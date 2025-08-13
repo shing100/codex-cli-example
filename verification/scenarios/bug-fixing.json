@@ -1,0 +1,28 @@
+{
+  "name": "버그 수정",
+  "description": "코드에서 버그를 식별하고 수정하는 시나리오",
+  "category": "debugging",
+  "difficulty": "high",
+  "prompt": "Identify and fix all bugs in this code, explaining what was wrong and why the fix works",
+  "context": "// Bug-ridden code that needs fixing\nfunction processUserOrders(users, orders) {\n  const result = [];\n  \n  // Bug 1: Incorrect loop condition\n  for (let i = 0; i <= users.length; i++) {\n    const user = users[i];\n    \n    // Bug 2: Not checking if user exists\n    const userOrders = orders.filter(order => order.userId = user.id);\n    \n    // Bug 3: Wrong property access\n    const totalAmount = userOrders.reduce((sum, order) => {\n      return sum + order.amount;\n    }, 0);\n    \n    // Bug 4: Memory leak - creating new date in loop\n    const processedDate = new Date();\n    \n    // Bug 5: Mutating original object\n    user.totalSpent = totalAmount;\n    user.processedAt = processedDate;\n    \n    result.push(user);\n  }\n  \n  return result;\n}\n\nasync function fetchUserData(userId) {\n  try {\n    // Bug 6: No error handling for missing userId\n    const response = await fetch(`/api/users/${userId}`);\n    \n    // Bug 7: Not checking response status\n    const userData = await response.json();\n    \n    // Bug 8: Returning undefined instead of null for missing user\n    return userData.user;\n  } catch (error) {\n    // Bug 9: Swallowing errors silently\n    console.log('Error occurred');\n  }\n}\n\nclass CartManager {\n  constructor() {\n    this.items = [];\n  }\n  \n  addItem(item) {\n    // Bug 10: Not validating input\n    this.items.push(item);\n  }\n  \n  removeItem(itemId) {\n    // Bug 11: Using wrong array method\n    this.items.splice(itemId, 1);\n  }\n  \n  calculateTotal() {\n    // Bug 12: Not handling undefined/null prices\n    return this.items.reduce((total, item) => total + item.price, 0);\n  }\n}",
+  "expectedPatterns": [
+    "i\\s*<\\s*users\\.length",
+    "===",
+    "if\\s*\\(user\\)",
+    "if\\s*\\(!response\\.ok\\)",
+    "throw\\s+new\\s+Error",
+    "findIndex",
+    "&&",
+    "\\|\\|",
+    "item\\.price\\s*\\|\\|\\s*0",
+    "spread\\s*operator"
+  ],
+  "qualityMetrics": {
+    "minLinesOfCode": 30,
+    "bugsToFix": 12,
+    "shouldInclude": ["proper error handling", "input validation", "correct operators", "safe property access"],
+    "complexityScore": 7
+  },
+  "timeout": 60000,
+  "iterations": 3
+}

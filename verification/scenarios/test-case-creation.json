@@ -1,0 +1,28 @@
+{
+  "name": "테스트 케이스 생성",
+  "description": "포괄적인 단위 테스트 및 통합 테스트 생성 시나리오",
+  "category": "testing",
+  "difficulty": "medium",
+  "prompt": "Write comprehensive unit tests for this function including edge cases, error scenarios, and proper mocking",
+  "context": "// Function to test\nfunction calculateShippingCost(items, destination, shippingMethod) {\n  if (!items || items.length === 0) {\n    throw new Error('Items array cannot be empty');\n  }\n  \n  if (!destination || !destination.country) {\n    throw new Error('Destination must include country');\n  }\n  \n  const totalWeight = items.reduce((sum, item) => {\n    if (!item.weight || item.weight <= 0) {\n      throw new Error('All items must have valid weight');\n    }\n    return sum + item.weight;\n  }, 0);\n  \n  const baseRate = getBaseRate(destination.country);\n  const methodMultiplier = getMethodMultiplier(shippingMethod);\n  \n  if (totalWeight > 50) {\n    throw new Error('Package too heavy for shipping');\n  }\n  \n  const cost = baseRate * totalWeight * methodMultiplier;\n  return Math.round(cost * 100) / 100; // Round to 2 decimal places\n}\n\nfunction getBaseRate(country) {\n  const rates = {\n    'US': 2.5,\n    'CA': 3.0,\n    'UK': 4.0,\n    'DE': 3.5\n  };\n  return rates[country] || 5.0; // Default rate for other countries\n}\n\nfunction getMethodMultiplier(method) {\n  const multipliers = {\n    'standard': 1.0,\n    'express': 1.5,\n    'overnight': 2.5\n  };\n  return multipliers[method] || 1.0; // Default to standard\n}",
+  "expectedPatterns": [
+    "describe\\s*\\(",
+    "test\\s*\\(",
+    "expect\\s*\\(",
+    "toThrow\\s*\\(",
+    "toBe\\s*\\(",
+    "toEqual\\s*\\(",
+    "mock",
+    "jest\\.fn",
+    "beforeEach",
+    "afterEach"
+  ],
+  "qualityMetrics": {
+    "minLinesOfCode": 30,
+    "expectedTestCases": ["valid input", "empty items", "invalid destination", "weight limits", "edge cases"],
+    "shouldInclude": ["error testing", "mock functions", "setup/teardown"],
+    "complexityScore": 4
+  },
+  "timeout": 40000,
+  "iterations": 3
+}

@@ -1,0 +1,31 @@
+{
+  "name": "리팩토링 최적화",
+  "description": "코드 성능 최적화 및 구조 개선 시나리오",
+  "category": "optimization",
+  "difficulty": "high",
+  "prompt": "Refactor this code for better performance, maintainability, and modern JavaScript/TypeScript practices",
+  "context": "// Legacy code that needs optimization and refactoring\nvar UserManager = function() {\n  this.users = [];\n  this.cache = {};\n};\n\nUserManager.prototype.addUser = function(userData) {\n  // Inefficient: No validation, direct push\n  var newUser = {\n    id: Math.random().toString(36),\n    name: userData.name,\n    email: userData.email,\n    createdAt: new Date().toISOString()\n  };\n  \n  this.users.push(newUser);\n  \n  // Inefficient: Linear search every time\n  for (var i = 0; i < this.users.length; i++) {\n    if (this.users[i].email === userData.email) {\n      console.log('Duplicate email found');\n    }\n  }\n  \n  return newUser;\n};\n\nUserManager.prototype.findUser = function(criteria) {\n  // Inefficient: Always loops through all users\n  var results = [];\n  \n  for (var i = 0; i < this.users.length; i++) {\n    var user = this.users[i];\n    var matches = true;\n    \n    // Inefficient: Nested loops\n    for (var key in criteria) {\n      if (user[key] !== criteria[key]) {\n        matches = false;\n        break;\n      }\n    }\n    \n    if (matches) {\n      results.push(user);\n    }\n  }\n  \n  return results;\n};\n\nUserManager.prototype.getUserStats = function() {\n  // Inefficient: Multiple loops\n  var totalUsers = this.users.length;\n  var activeUsers = 0;\n  var usersByRole = {};\n  \n  for (var i = 0; i < this.users.length; i++) {\n    if (this.users[i].isActive) {\n      activeUsers++;\n    }\n  }\n  \n  for (var j = 0; j < this.users.length; j++) {\n    var role = this.users[j].role || 'user';\n    if (usersByRole[role]) {\n      usersByRole[role]++;\n    } else {\n      usersByRole[role] = 1;\n    }\n  }\n  \n  return {\n    total: totalUsers,\n    active: activeUsers,\n    byRole: usersByRole\n  };\n};\n\n// Poor separation of concerns\nUserManager.prototype.sendWelcomeEmail = function(userId) {\n  // Inefficient: Linear search\n  var user = null;\n  for (var i = 0; i < this.users.length; i++) {\n    if (this.users[i].id === userId) {\n      user = this.users[i];\n      break;\n    }\n  }\n  \n  if (user) {\n    // Hardcoded email logic (should be extracted)\n    console.log('Sending email to: ' + user.email);\n    console.log('Subject: Welcome!');\n    console.log('Body: Welcome to our service, ' + user.name);\n  }\n};",
+  "expectedPatterns": [
+    "class\\s+UserManager",
+    "Map\\s*\\(",
+    "Set\\s*\\(",
+    "const\\s+",
+    "let\\s+",
+    "=>",
+    "reduce\\s*\\(",
+    "filter\\s*\\(",
+    "find\\s*\\(",
+    "async\\s+",
+    "await\\s+",
+    "private\\s+",
+    "static\\s+"
+  ],
+  "qualityMetrics": {
+    "minLinesOfCode": 60,
+    "optimizations": ["Map/Set usage", "single iteration", "ES6+ features", "separation of concerns"],
+    "shouldInclude": ["modern JS syntax", "performance improvements", "better data structures", "clean architecture"],
+    "complexityScore": 8
+  },
+  "timeout": 60000,
+  "iterations": 3
+}

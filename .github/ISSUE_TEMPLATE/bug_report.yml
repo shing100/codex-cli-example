@@ -1,0 +1,128 @@
+name: 🐛 Bug Report
+description: Report a bug or issue with examples or documentation
+title: "[BUG] "
+labels: ["bug", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug! Please fill out this form to help us understand and fix the issue.
+
+  - type: checkboxes
+    id: search
+    attributes:
+      label: Search before posting
+      description: Please search existing issues before creating a new one
+      options:
+        - label: I have searched existing issues and this is not a duplicate
+          required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: What category does this bug relate to?
+      options:
+        - Example Code
+        - Documentation
+        - Prompts
+        - Workflow Guide
+        - Benchmark System
+        - Verification Scripts
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is
+      placeholder: Describe the bug...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Step by step instructions to reproduce the bug
+      placeholder: |
+        1. Go to...
+        2. Run command...
+        3. See error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What you expected to happen
+      placeholder: What should have happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened
+      placeholder: What actually happened?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How severe is this bug?
+      options:
+        - Low (Minor inconvenience)
+        - Medium (Affects functionality)
+        - High (Blocks usage)
+        - Critical (Data loss or security issue)
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Information about your environment
+      value: |
+        - OS: [e.g., Ubuntu 20.04, macOS 12.0, Windows 11]
+        - Node.js version: [e.g., 18.16.0]
+        - Codex CLI version: [e.g., 0.20.0]
+        - Shell: [e.g., bash, zsh, PowerShell]
+        - Browser (if applicable): [e.g., Chrome 114, Firefox 115]
+    validations:
+      required: true
+
+  - type: textarea
+    id: error_logs
+    attributes:
+      label: Error Logs
+      description: Any error messages or logs (please use code blocks)
+      placeholder: |
+        ```
+        Paste error logs here
+        ```
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other context about the problem (screenshots, related issues, etc.)
+
+  - type: checkboxes
+    id: willing_to_help
+    attributes:
+      label: Contribution
+      description: Are you willing to help fix this bug?
+      options:
+        - label: I would like to work on fixing this bug
+        - label: I can provide additional testing
+        - label: I can help with documentation updates

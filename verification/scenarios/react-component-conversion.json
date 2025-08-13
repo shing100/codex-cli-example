@@ -1,0 +1,25 @@
+{
+  "name": "React 컴포넌트 변환",
+  "description": "클래스 컴포넌트를 함수형 컴포넌트로 변환하는 시나리오",
+  "category": "frontend",
+  "difficulty": "medium",
+  "prompt": "Convert this class component to functional component using React Hooks, preserving all state and lifecycle methods",
+  "context": "class UserProfile extends React.Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      user: null,\n      loading: true,\n      error: null\n    };\n  }\n\n  componentDidMount() {\n    this.fetchUserData();\n  }\n\n  componentDidUpdate(prevProps) {\n    if (prevProps.userId !== this.props.userId) {\n      this.fetchUserData();\n    }\n  }\n\n  fetchUserData = async () => {\n    try {\n      this.setState({ loading: true, error: null });\n      const response = await fetch(`/api/users/${this.props.userId}`);\n      const user = await response.json();\n      this.setState({ user, loading: false });\n    } catch (error) {\n      this.setState({ error: error.message, loading: false });\n    }\n  };\n\n  render() {\n    const { user, loading, error } = this.state;\n    \n    if (loading) return <div>Loading...</div>;\n    if (error) return <div>Error: {error}</div>;\n    \n    return (\n      <div className=\"user-profile\">\n        <h2>{user?.name}</h2>\n        <p>{user?.email}</p>\n        <button onClick={this.fetchUserData}>Refresh</button>\n      </div>\n    );\n  }\n}",
+  "expectedPatterns": [
+    "useState",
+    "useEffect", 
+    "const\\s+UserProfile\\s*=",
+    "async\\s*\\(",
+    "\\[.*,\\s*setUser\\]",
+    "\\[.*,\\s*setLoading\\]",
+    "\\[.*,\\s*setError\\]"
+  ],
+  "qualityMetrics": {
+    "minLinesOfCode": 15,
+    "expectedHooks": ["useState", "useEffect"],
+    "shouldAvoid": ["class", "this.state", "componentDidMount"],
+    "complexityScore": 3
+  },
+  "timeout": 30000,
+  "iterations": 3
+}

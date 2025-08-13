@@ -1,0 +1,322 @@
+{
+  "timestamp": "2025-08-13T04:04:47.728Z",
+  "environment": {
+    "os": "linux",
+    "nodeVersion": "v22.17.0",
+    "codexVersion": "codex-cli 0.20.0",
+    "timestamp": "2025-08-13T04:04:47.847Z",
+    "hardware": {
+      "cpus": 4,
+      "memory": "8GB"
+    }
+  },
+  "scenarios": {
+    "react-component-conversion": {
+      "success": true,
+      "iterations": 3,
+      "successfulIterations": 3,
+      "successRate": 100,
+      "averageResponseTime": 0,
+      "minResponseTime": 0,
+      "maxResponseTime": 1,
+      "metrics": {
+        "response-time": {
+          "average": 100,
+          "min": 100,
+          "max": 100
+        },
+        "code-quality": {
+          "average": 90,
+          "min": 90,
+          "max": 90
+        },
+        "accuracy": {
+          "average": 100,
+          "min": 100,
+          "max": 100
+        },
+        "completeness": {
+          "average": 100,
+          "min": 100,
+          "max": 100
+        },
+        "maintainability": {
+          "average": 60,
+          "min": 60,
+          "max": 60
+        },
+        "security": {
+          "average": 70,
+          "min": 70,
+          "max": 70
+        }
+      }
+    },
+    "api-endpoint-generation": {
+      "success": true,
+      "iterations": 3,
+      "successfulIterations": 3,
+      "successRate": 100,
+      "averageResponseTime": 0,
+      "minResponseTime": 0,
+      "maxResponseTime": 0,
+      "metrics": {
+        "response-time": {
+          "average": 100,
+          "min": 100,
+          "max": 100
+        },
+        "code-quality": {
+          "average": 100,
+          "min": 100,
+          "max": 100
+        },
+        "accuracy": {
+          "average": 63.63636363636363,
+          "min": 63.63636363636363,
+          "max": 63.63636363636363
+        },
+        "completeness": {
+          "average": 100,
+          "min": 100,
+          "max": 100
+        },
+        "maintainability": {
+          "average": 60,
+          "min": 60,
+          "max": 60
+        },
+        "security": {
+          "average": 70,
+          "min": 70,
+          "max": 70
+        }
+      }
+    },
+    "test-case-creation": {
+      "success": true,
+      "iterations": 3,
+      "successfulIterations": 3,
+      "successRate": 100,
+      "averageResponseTime": 0,
+      "minResponseTime": 0,
+      "maxResponseTime": 1,
+      "metrics": {
+        "response-time": {
+          "average": 100,
+          "min": 100,
+          "max": 100
+        },
+        "code-quality": {
+          "average": 65,
+          "min": 65,
+          "max": 65
+        },
+        "accuracy": {
+          "average": 50,
+          "min": 50,
+          "max": 50
+        },
+        "completeness": {
+          "average": 100,
+          "min": 100,
+          "max": 100
+        },
+        "maintainability": {
+          "average": 60,
+          "min": 60,
+          "max": 60
+        },
+        "security": {
+          "average": 70,
+          "min": 70,
+          "max": 70
+        }
+      }
+    },
+    "typescript-migration": {
+      "success": true,
+      "iterations": 3,
+      "successfulIterations": 3,
+      "successRate": 100,
+      "averageResponseTime": 0,
+      "minResponseTime": 0,
+      "maxResponseTime": 0,
+      "metrics": {
+        "response-time": {
+          "average": 100,
+          "min": 100,
+          "max": 100
+        },
+        "code-quality": {
+          "average": 90,
+          "min": 90,
+          "max": 90
+        },
+        "accuracy": {
+          "average": 10,
+          "min": 10,
+          "max": 10
+        },
+        "completeness": {
+          "average": 100,
+          "min": 100,
+          "max": 100
+        },
+        "maintainability": {
+          "average": 60,
+          "min": 60,
+          "max": 60
+        },
+        "security": {
+          "average": 70,
+          "min": 70,
+          "max": 70
+        }
+      }
+    },
+    "bug-fixing": {
+      "success": true,
+      "iterations": 3,
+      "successfulIterations": 3,
+      "successRate": 100,
+      "averageResponseTime": 0,
+      "minResponseTime": 0,
+      "maxResponseTime": 1,
+      "metrics": {
+        "response-time": {
+          "average": 100,
+          "min": 100,
+          "max": 100
+        },
+        "code-quality": {
+          "average": 65,
+          "min": 65,
+          "max": 65
+        },
+        "accuracy": {
+          "average": 0,
+          "min": 0,
+          "max": 0
+        },
+        "completeness": {
+          "average": 100,
+          "min": 100,
+          "max": 100
+        },
+        "maintainability": {
+          "average": 50,
+          "min": 50,
+          "max": 50
+        },
+        "security": {
+          "average": 70,
+          "min": 70,
+          "max": 70
+        }
+      }
+    },
+    "documentation-generation": {
+      "success": true,
+      "iterations": 3,
+      "successfulIterations": 3,
+      "successRate": 100,
+      "averageResponseTime": 0,
+      "minResponseTime": 0,
+      "maxResponseTime": 0,
+      "metrics": {
+        "response-time": {
+          "average": 100,
+          "min": 100,
+          "max": 100
+        },
+        "code-quality": {
+          "average": 65,
+          "min": 65,
+          "max": 65
+        },
+        "accuracy": {
+          "average": 0,
+          "min": 0,
+          "max": 0
+        },
+        "completeness": {
+          "average": 100,
+          "min": 100,
+          "max": 100
+        },
+        "maintainability": {
+          "average": 50,
+          "min": 50,
+          "max": 50
+        },
+        "security": {
+          "average": 70,
+          "min": 70,
+          "max": 70
+        }
+      }
+    },
+    "refactoring-optimization": {
+      "success": true,
+      "iterations": 3,
+      "successfulIterations": 3,
+      "successRate": 100,
+      "averageResponseTime": 0,
+      "minResponseTime": 0,
+      "maxResponseTime": 1,
+      "metrics": {
+        "response-time": {
+          "average": 100,
+          "min": 100,
+          "max": 100
+        },
+        "code-quality": {
+          "average": 65,
+          "min": 65,
+          "max": 65
+        },
+        "accuracy": {
+          "average": 30.76923076923077,
+          "min": 30.76923076923077,
+          "max": 30.76923076923077
+        },
+        "completeness": {
+          "average": 100,
+          "min": 100,
+          "max": 100
+        },
+        "maintainability": {
+          "average": 65,
+          "min": 65,
+          "max": 65
+        },
+        "security": {
+          "average": 70,
+          "min": 70,
+          "max": 70
+        }
+      }
+    }
+  },
+  "summary": {
+    "totalScenarios": 7,
+    "successfulScenarios": 7,
+    "overallSuccessRate": 100,
+    "averageResponseTime": 0,
+    "recommendedUseCases": [
+      {
+        "scenario": "Unknown",
+        "reason": "100% 성공률, 평균 0ms 응답시간"
+      },
+      {
+        "scenario": "Unknown",
+        "reason": "100% 성공률, 평균 0ms 응답시간"
+      },
+      {
+        "scenario": "Unknown",
+        "reason": "100% 성공률, 평균 0ms 응답시간"
+      }
+    ]
+  }
+}

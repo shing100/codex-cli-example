@@ -1,0 +1,28 @@
+{
+  "name": "문서 생성",
+  "description": "코드에 대한 포괄적인 문서 생성 시나리오",
+  "category": "documentation",
+  "difficulty": "medium",
+  "prompt": "Generate comprehensive documentation for this code including JSDoc comments, README sections, and API documentation",
+  "context": "// Undocumented utility functions that need documentation\nfunction debounce(func, wait, immediate) {\n  let timeout;\n  return function executedFunction(...args) {\n    const later = () => {\n      timeout = null;\n      if (!immediate) func.apply(this, args);\n    };\n    const callNow = immediate && !timeout;\n    clearTimeout(timeout);\n    timeout = setTimeout(later, wait);\n    if (callNow) func.apply(this, args);\n  };\n}\n\nfunction throttle(func, limit) {\n  let inThrottle;\n  return function() {\n    const args = arguments;\n    const context = this;\n    if (!inThrottle) {\n      func.apply(context, args);\n      inThrottle = true;\n      setTimeout(() => inThrottle = false, limit);\n    }\n  };\n}\n\nclass DataCache {\n  constructor(maxSize = 100, ttl = 300000) {\n    this.cache = new Map();\n    this.maxSize = maxSize;\n    this.ttl = ttl;\n  }\n  \n  set(key, value) {\n    if (this.cache.size >= this.maxSize) {\n      const firstKey = this.cache.keys().next().value;\n      this.cache.delete(firstKey);\n    }\n    \n    this.cache.set(key, {\n      value,\n      timestamp: Date.now()\n    });\n  }\n  \n  get(key) {\n    const item = this.cache.get(key);\n    \n    if (!item) {\n      return null;\n    }\n    \n    if (Date.now() - item.timestamp > this.ttl) {\n      this.cache.delete(key);\n      return null;\n    }\n    \n    return item.value;\n  }\n  \n  clear() {\n    this.cache.clear();\n  }\n  \n  size() {\n    return this.cache.size;\n  }\n}",
+  "expectedPatterns": [
+    "\\/\\*\\*[\\s\\S]*?\\*\\/",
+    "@param",
+    "@returns?",
+    "@example",
+    "@description",
+    "@throws?",
+    "# [A-Z]",
+    "## [A-Z]",
+    "```javascript",
+    "```"
+  ],
+  "qualityMetrics": {
+    "minLinesOfCode": 50,
+    "expectedSections": ["JSDoc comments", "parameter descriptions", "return values", "examples"],
+    "shouldInclude": ["function descriptions", "parameter types", "usage examples", "error conditions"],
+    "complexityScore": 4
+  },
+  "timeout": 45000,
+  "iterations": 3
+}

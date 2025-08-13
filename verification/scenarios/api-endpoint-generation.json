@@ -1,0 +1,29 @@
+{
+  "name": "API 엔드포인트 생성",
+  "description": "CRUD 작업을 포함한 RESTful API 엔드포인트 생성 시나리오",
+  "category": "backend",
+  "difficulty": "medium",
+  "prompt": "Create a complete REST API for user management with CRUD operations, input validation, error handling, and proper HTTP status codes",
+  "context": "// Create Express.js API endpoints for User resource\n// Requirements:\n// - GET /users - list all users with pagination\n// - GET /users/:id - get specific user\n// - POST /users - create new user\n// - PUT /users/:id - update user\n// - DELETE /users/:id - delete user\n// - Input validation using middleware\n// - Proper error handling\n// - JWT authentication\n// - Rate limiting",
+  "expectedPatterns": [
+    "router\\.get.*users",
+    "router\\.post.*users", 
+    "router\\.put.*users",
+    "router\\.delete.*users",
+    "async\\s*\\(",
+    "try\\s*\\{",
+    "catch\\s*\\(",
+    "res\\.status\\(",
+    "res\\.json\\(",
+    "middleware",
+    "validation"
+  ],
+  "qualityMetrics": {
+    "minLinesOfCode": 50,
+    "expectedMethods": ["GET", "POST", "PUT", "DELETE"],
+    "shouldInclude": ["validation", "error handling", "status codes"],
+    "complexityScore": 5
+  },
+  "timeout": 45000,
+  "iterations": 3
+}

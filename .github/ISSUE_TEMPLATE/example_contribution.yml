@@ -1,0 +1,256 @@
+name: 📝 Example Contribution
+description: Submit a new example or improve an existing one
+title: "[EXAMPLE] "
+labels: ["example", "contribution", "needs-review"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for contributing an example! This helps the entire community learn and grow.
+
+  - type: dropdown
+    id: contribution_type
+    attributes:
+      label: Contribution Type
+      description: What type of example contribution is this?
+      options:
+        - New Example
+        - Example Improvement
+        - Example Fix
+        - Example Translation
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Example Category
+      description: Which category does this example belong to?
+      options:
+        - Frontend (React, Vue, Angular)
+        - Backend (Node.js, Python, Go)
+        - Full-Stack (MEAN, MERN, T3)
+        - Mobile (React Native, Flutter)
+        - AI/ML (PyTorch, TensorFlow)
+        - DevOps (Docker, Kubernetes, CI/CD)
+        - Desktop (Electron, Tauri)
+        - Game Development
+        - Data Science
+        - Blockchain/Web3
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: difficulty
+    attributes:
+      label: Difficulty Level
+      description: What's the difficulty level of this example?
+      options:
+        - Beginner (Basic concepts)
+        - Intermediate (Some experience needed)
+        - Advanced (Deep knowledge required)
+        - Expert (Specialized domain knowledge)
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Example Description
+      description: Provide a clear description of what this example demonstrates
+      placeholder: |
+        This example shows how to...
+        It demonstrates...
+        Users will learn...
+    validations:
+      required: true
+
+  - type: textarea
+    id: technologies
+    attributes:
+      label: Technologies Used
+      description: List all technologies, frameworks, and tools used in this example
+      placeholder: |
+        - React 18
+        - TypeScript 5.0
+        - Tailwind CSS
+        - Vite
+        - ESLint
+    validations:
+      required: true
+
+  - type: textarea
+    id: learning_objectives
+    attributes:
+      label: Learning Objectives
+      description: What will users learn from this example?
+      placeholder: |
+        After completing this example, users will be able to:
+        - Objective 1
+        - Objective 2
+        - Objective 3
+    validations:
+      required: true
+
+  - type: textarea
+    id: prerequisites
+    attributes:
+      label: Prerequisites
+      description: What knowledge or tools are required before starting this example?
+      placeholder: |
+        Required knowledge:
+        - Basic JavaScript/TypeScript
+        - Understanding of React hooks
+        
+        Required tools:
+        - Node.js 18+
+        - npm or yarn
+    validations:
+      required: true
+
+  - type: dropdown
+    id: time_estimate
+    attributes:
+      label: Time Estimate
+      description: How long should it take to complete this example?
+      options:
+        - 15-30 minutes
+        - 30-60 minutes
+        - 1-2 hours
+        - 2-4 hours
+        - Half day (4-8 hours)
+        - Full day (8+ hours)
+    validations:
+      required: true
+
+  - type: textarea
+    id: codex_prompts
+    attributes:
+      label: Key Codex Prompts
+      description: List the main Codex prompts that will be used in this example
+      placeholder: |
+        1. "Create a React TypeScript component with props interface"
+        2. "Add form validation using Yup schema"
+        3. "Generate unit tests for this component"
+    validations:
+      required: true
+
+  - type: textarea
+    id: file_structure
+    attributes:
+      label: Expected File Structure
+      description: Show the file/folder structure that will be created
+      placeholder: |
+        example-name/
+        ├── src/
+        │   ├── components/
+        │   ├── hooks/
+        │   └── utils/
+        ├── tests/
+        ├── README.md
+        └── package.json
+
+  - type: textarea
+    id: testing_info
+    attributes:
+      label: Testing Information
+      description: How has this example been tested? What's the success rate?
+      placeholder: |
+        Testing environment:
+        - OS: Ubuntu 20.04, macOS 12, Windows 11
+        - Node.js: 18.16.0
+        - Codex CLI: 0.20.0
+        
+        Test results:
+        - Success rate: 95% (19/20 tests)
+        - Average completion time: 45 minutes
+        - Common issues: ...
+
+  - type: checkboxes
+    id: validation_checklist
+    attributes:
+      label: Validation Checklist
+      description: Please confirm that your example meets these criteria
+      options:
+        - label: Code is syntactically correct and runs without errors
+          required: true
+        - label: All Codex prompts have been tested and work as expected
+          required: true
+        - label: Example follows established coding standards and best practices
+          required: true
+        - label: Documentation is clear and complete
+          required: true
+        - label: Example is practical and addresses real-world use cases
+          required: true
+        - label: All dependencies are clearly listed
+          required: true
+        - label: No sensitive information (API keys, passwords) is included
+          required: true
+
+  - type: textarea
+    id: related_examples
+    attributes:
+      label: Related Examples
+      description: Are there any existing examples this builds upon or relates to?
+      placeholder: |
+        Builds on:
+        - Basic React Component Example
+        
+        Related to:
+        - Form Validation Example
+        - Testing Best Practices
+
+  - type: textarea
+    id: community_value
+    attributes:
+      label: Community Value
+      description: Why would this example be valuable to the community?
+      placeholder: |
+        This example addresses a common need for...
+        It fills a gap in our current examples by...
+        The community has requested this type of example...
+
+  - type: dropdown
+    id: maintenance
+    attributes:
+      label: Maintenance Commitment
+      description: Are you willing to maintain this example?
+      options:
+        - Yes, I commit to maintaining this example
+        - Yes, for the next 6 months
+        - Yes, for the next year
+        - No, but I'll help with initial setup
+        - I need help with maintenance
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional_notes
+    attributes:
+      label: Additional Notes
+      description: Any other information that would be helpful
+      placeholder: |
+        Special considerations:
+        - ...
+        
+        Future enhancements:
+        - ...
+        
+        Known limitations:
+        - ...
+
+  - type: checkboxes
+    id: contribution_agreement
+    attributes:
+      label: Contribution Agreement
+      description: Please confirm your agreement
+      options:
+        - label: I agree to license this contribution under the project's license
+          required: true
+        - label: I confirm this is my original work or I have permission to contribute it
+          required: true
+        - label: I understand this will be reviewed by maintainers before inclusion
+          required: true

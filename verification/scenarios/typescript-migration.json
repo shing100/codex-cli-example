@@ -1,0 +1,28 @@
+{
+  "name": "TypeScript 마이그레이션",
+  "description": "JavaScript 코드를 TypeScript로 변환하고 타입 안전성 추가",
+  "category": "refactoring",
+  "difficulty": "high",
+  "prompt": "Convert this JavaScript code to TypeScript with proper interfaces, types, and generics for maximum type safety",
+  "context": "// JavaScript code to migrate to TypeScript\nconst userService = {\n  users: [],\n  \n  addUser: function(userData) {\n    const user = {\n      id: Date.now(),\n      name: userData.name,\n      email: userData.email,\n      role: userData.role || 'user',\n      createdAt: new Date(),\n      isActive: true\n    };\n    \n    this.users.push(user);\n    return user;\n  },\n  \n  findUserById: function(id) {\n    return this.users.find(user => user.id === id);\n  },\n  \n  updateUser: function(id, updates) {\n    const userIndex = this.users.findIndex(user => user.id === id);\n    if (userIndex === -1) {\n      throw new Error('User not found');\n    }\n    \n    this.users[userIndex] = { ...this.users[userIndex], ...updates };\n    return this.users[userIndex];\n  },\n  \n  deleteUser: function(id) {\n    const userIndex = this.users.findIndex(user => user.id === id);\n    if (userIndex === -1) {\n      return false;\n    }\n    \n    this.users.splice(userIndex, 1);\n    return true;\n  },\n  \n  filterUsers: function(criteria) {\n    return this.users.filter(user => {\n      return Object.keys(criteria).every(key => \n        user[key] === criteria[key]\n      );\n    });\n  }\n};\n\nconst apiClient = {\n  baseUrl: 'https://api.example.com',\n  \n  makeRequest: async function(method, endpoint, data) {\n    const url = this.baseUrl + endpoint;\n    const options = {\n      method: method.toUpperCase(),\n      headers: {\n        'Content-Type': 'application/json'\n      }\n    };\n    \n    if (data) {\n      options.body = JSON.stringify(data);\n    }\n    \n    const response = await fetch(url, options);\n    \n    if (!response.ok) {\n      throw new Error(`HTTP ${response.status}: ${response.statusText}`);\n    }\n    \n    return response.json();\n  }\n};",
+  "expectedPatterns": [
+    "interface\\s+\\w+",
+    "type\\s+\\w+",
+    ":\\s*string",
+    ":\\s*number", 
+    ":\\s*boolean",
+    ":\\s*Date",
+    "\\<.*\\>",
+    "Promise\\<.*\\>",
+    "readonly",
+    "optional\\s*\\?"
+  ],
+  "qualityMetrics": {
+    "minLinesOfCode": 40,
+    "expectedTypes": ["User", "UserData", "ApiResponse", "HttpMethod"],
+    "shouldInclude": ["interfaces", "generics", "strict types", "optional properties"],
+    "complexityScore": 6
+  },
+  "timeout": 50000,
+  "iterations": 3
+}
